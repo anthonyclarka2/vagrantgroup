@@ -1,0 +1,10 @@
+---
+version: 5
+hierarchy:
+  - name: Common
+    path: common.yaml
+  - name: "Per-worker data"
+    path: "%{networking.fqdn}.yaml" # Add file extension.
+defaults:
+  data_hash: yaml_data
+  datadir: data # ./puppet/environments/vagrant/data/

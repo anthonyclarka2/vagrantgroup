@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+# ^syntax detection
+
+forge 'https://forgeapi.puppetlabs.com'
+
+# See https://github.com/rodjek/librarian-puppet for documentation regarding this file
+# This project does not use the modules listed below, they are included as an example.
+
+mod 'thias-sysctl'
+mod 'puppet-archive'
+mod 'razorsedge-network'
+mod 'puppetlabs-java_ks'
