@@ -3,7 +3,7 @@
 ### Description
 This project is at its heart a Vagrantfile to create one "controller" VM and multiple "worker" VMs.  This can be used to test load balancing, clustered software such as JBoss domain mode, server-client software, or many other multi-VM scenarios.
 
-It also includes configuration code using Puppet to set up some basic helper tools such as a shared host-only network connecting the VMs, VM:/etc/hosts with all hostnames added, and a shared SSH public key for each hosts' root users.
+It also includes configuration code using Puppet to set up some basic helper tools such as a shared host-only network connecting the VMs, creates VM:/etc/hosts with all hostnames added, and a shared SSH public key for each hosts' root users.
 
 ### Requirements
 
@@ -49,12 +49,13 @@ Host 10.0.3.* *.test.local
   User root
   IdentityFile ~/.ssh/vagrantgroup_rsa
   Compression no
+  # NOTE: ControlMaster requires Linux or Mac and does not work under Cygwin
   ControlMaster auto
   ControlPath ~/.ssh/sockets/%r@%h-%p
   ControlPersist 600
 ```
 
-Remember that ssh config files use the first value matched.  The "ControlMaster" attributes require a linux or mac to work, and will fail if the ~/.ssh/sockets/ directory does not exist.
+Remember that ssh config files use the first value matched.  The "ControlMaster" attributes require a linux or mac to work, and will fail if the ~/.ssh/sockets/ directory does not exist.  I have not tested it under Windows 10 Linux shell.
 
 The files were created using this command:
 ```
@@ -74,6 +75,8 @@ The key's randomart image is:
 |                 |
 +----[SHA256]-----+
 ```
+
+TODO: add randomized vagrant and root user passwords.
 
 ### Puppet
 This project relies on Puppet to do the post-boot VM configuration.
